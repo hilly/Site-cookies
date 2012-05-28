@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript">
+		function createCookie(name,value,days) {
+			if (days) {
+				var date = new Date();
+				date.setTime(date.getTime()+(days*24*60*60*1000));
+				var expires = "; expires="+date.toGMTString();
+			}
+			else var expires = "";
+			document.cookie = name+"="+value+expires+"; path=/";
+		}
+
+		function readCookie(name) {
+			var nameEQ = name + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0;i < ca.length;i++) {
+				var c = ca[i];
+				while (c.charAt(0)==' ') c = c.substring(1,c.length);
+				if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+			}
+			return null;
+		}
+
+		function eraseCookie(name) {
+			createCookie(name,"",-1);
+		}
+
+		function checkCookieOptionsForm(){
+			var performanceoption=1;
+			var functionalityoption=1;
+			
+			if (document.cookiesopt.performance[0].checked) {
+				performanceoption = 1;
+			} else if (document.cookiesopt.performance[1].checked) {
+				performanceoption = 0;
+			}
+			if (document.cookiesopt.functionality[0].checked) {
+				functionalityoption = 1;
+			} else if (document.cookiesopt.functionality[1].checked) {
+				functionalityoption = 0;
+			}
+			
+			createCookie('cookies-options',performanceoption.toString()+functionalityoption.toString(),62);
+		}
+		/*
+		 * Can process arrays containing names of cookies to be managed
+		 */
+		function checkCookieOptionsCookie(cookies_performance, cookies_functionality){
+			var opt = readCookie('cookies-options');
+			if (opt!=null) {
+				switch(opt){
+				case "00":                  
+					document.cookiesopt.performance[1].checked=true;
+					document.cookiesopt.functionality[1].checked=true;
+					for (var i=0, thing; thing = cookies_performance[i]; i++){
+						eraseCookie(thing);
+					}
+					for (var i=0, thing; thing = cookies_functionality[i]; i++){
+						eraseCookie(thing);
+					}
+					break;
+				case "01":                  
+					document.cookiesopt.performance[1].checked=true;
+					document.cookiesopt.functionality[0].checked=true;
+					for (var i=0, thing; thing = cookies_performance[i]; i++){
+						eraseCookie(thing);
+					}
+					break;
+				case "10":                  
+					document.cookiesopt.performance[0].checked=true;
+					document.cookiesopt.functionality[1].checked=true;
+					for (var i=0, thing; thing = cookies_functionality[i]; i++){
+						eraseCookie(thing);
+					}
+					break;
+				case "11":                  
+					document.cookiesopt.performance[0].checked=true;
+					document.cookiesopt.functionality[0].checked=true;
+					break;
+				default:
+					alert(opt+' is the current value of the cookies-options cookie, which can\'t be processed, it can be 00, 01, 10 or 11');
+				}
+			}else{
+				/*
+					TODO no cookie options handler - prompt user.
+				*/
+			}
+		}
+
+		</script>
+		<title></title>
+	</head>
+	<body>
+		<form id="cookiesopt" name="cookiesopt" method="post" action="#" onsubmit="checkCookieOptionsForm()">
+			<h2>
+				1. Strictly necessary cookies
+			</h2>
+			<p>
+				These cookies are strictly necessary to enable you to move about the site or to provide certain features you have requested.
+			</p>
+			<div>
+				<span class="tick">✓</span> <label>Enabled</label>
+			</div>
+			<h2>
+				2. Performance cookies
+			</h2>
+			<p>
+				These cookies help to improve the performance of the website, providing a better user experience.
+			</p>
+			<div>
+				<input name="performance" type="radio" value="1" id="policy_performance_on" checked="checked"> <label for="policy_performance_on">Enabled</label> <input name="performance" type="radio" value="0" id="policy_performance_off"> <label for="policy_performance_off">Disabled</label>
+			</div>
+			<h2>
+				3. Functionality cookies
+			</h2>
+			<p>
+				These cookies enhance the functionality of website by storing your preferences.
+			</p>
+			<div>
+				<input name="functionality" type="radio" value="1" id="policy_functionality_on" checked="checked"> <label for="policy_functionality_on">Enabled</label> <input name="functionality" type="radio" value="0" id="policy_functionality_off"> <label for="policy_functionality_off">Disabled</label>
+			</div>
+			<div>
+				<input type="submit" value="Save my preferences">
+			</div>
+			<script type="text/javascript">
+			<!-- insert arrays of cookie names to manage, 1) performance 2) functionality -->
+				checkCookieOptionsCookie(['__utma','__utmb','__utmc','__utmv','__utmz'],['googtrans','PREF']);
+			</script>
+		</form>
+	</body>
+</html>
