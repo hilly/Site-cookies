@@ -3,6 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<script type="text/javascript">
+		// methods from quirksmode
 		function createCookie(name,value,days) {
 			if (days) {
 				var date = new Date();
@@ -24,8 +25,17 @@
 			return null;
 		}
 
+		// function eraseCookie(name) {
+		// 	createCookie(name,"",-1);
+		// }
+		// This method didn't remove e.g. cookies with a path that isn't /
+
+		// method from squarefree
 		function eraseCookie(name) {
-			createCookie(name,"",-1);
+		    for (d = "." + location.host; d; d = ("" + d).substr(1).match(/\..*$/)) 
+		      for (sl = 0; sl < 2; ++sl) 
+		        for (p = "/" + location.pathname; p; p = p.substring(0, p.lastIndexOf('/'))) 
+			        document.cookie = name + "; domain=" + d.slice(sl) + "; path=" + p.slice(1) + "/" + "; expires=" + new Date((new Date).getTime() - 1e11).toGMTString()
 		}
 
 		function checkCookieOptionsForm(){
