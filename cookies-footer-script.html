@@ -1,0 +1,109 @@
+<script type="text/javascript">
+
+    checkCookieOptionsCookie(['nmstat', 'ASP.NET_SessionId', 'MasterCookie', '__utma', '__utmb', '__utmc', '__utmv', '__utmz'], ['userFontsize', 'userFontchoice', 'userLetterspacing', 'userColourscheme', 'googtrans', 'PREF']);
+
+    var ca = document.cookie.split(';');
+    var cookies = '';
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        cookies = cookies + c + '\n';
+    }
+    if (!window.hhhgewrt34frdki) {
+        window.hhhgewrt34frdki = true;
+        $c = document.createElement('DIV');
+        $c.style.cssText = 'position:static;float:right;bottom:0px; right:0px;z-index:1000000;height:auto;width:auto';
+        document.body.appendChild($c);
+        oldscroll = window.onscroll;
+        window.onscroll = function () {
+            $c.style.top = (document.body.scrollTop + document.documentElement.scrollTop) + 5 + 'px';
+            if (oldscroll) {
+                oldscroll();
+            }
+        };
+
+        function dismiss$d() {
+            document.body.removeChild($c);
+            window.onscroll = oldscroll;
+            window.hhhgewrt34frdki = null;
+        };
+        $tbl = '<table>';
+        if (document.cookie) {
+            $tbl += '<tr><th>Cookie</th><th><div style=\'display:block;float:right;cursor:pointer;width:auto; padding-right: 5px;\' onclick=\'dismiss$d();\'>x</div>Value  </th></tr>';
+            $cc = document.cookie.split('; ');
+            for ($i = 0; $i < $cc.length; $i++) {
+                $c0 = $cc[$i];
+                $ci = $c0.indexOf('=');
+                if ($ci < 0) {
+                    $ci = $c0.length;
+                }
+                $tbl += '<tr><td>' + $c0.substr(0, $ci) + '</td><td>' + unescape($c0.substr($ci + 1)) + '</td></tr>';
+            }
+        } else {
+            $tbl += '<tr><th><div style=\'display:block;float:right;cursor:pointer;width:auto;padding-right: 5px;\' onclick=\'dismiss$d();\'>x</div>Cookies</th></tr>' + '<tr><td>None</td></tr>';
+        }
+        $tbl += '</table>';
+        $c.innerHTML = $tbl;
+        $c.style.top = (document.body.scrollTop + document.documentElement.scrollTop) + 5 + 'px';
+        $c.style.left = '5px';
+        void(x = 3);
+    }
+    function createCookie(name, value, days) {
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            var expires = "; expires=" + date.toGMTString();
+        } else var expires = "";
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+        for (d = "." + location.host; d; d = ("" + d).substr(1).match(/\..*$/))
+        for (sl = 0; sl < 2; ++sl)
+        for (p = "/" + location.pathname; p; p = p.substring(0, p.lastIndexOf('/')))
+        document.cookie = name + "; domain=" + d.slice(sl) + "; path=" + p.slice(1) + "/" + "; expires=" + new Date((new Date).getTime() - 1e11).toGMTString()
+    }
+
+    function checkCookieOptionsCookie(cookies_performance, cookies_functionality) {
+        var opt = readCookie('cookies-options');
+        if (opt != null) {
+            switch (opt) {
+            case "00":
+                for (var i = 0, thing; thing = cookies_performance[i]; i++) {
+                    eraseCookie(thing);
+                }
+                for (var i = 0, thing; thing = cookies_functionality[i]; i++) {
+                    eraseCookie(thing);
+                }
+                break;
+            case "01":
+                for (var i = 0, thing; thing = cookies_performance[i]; i++) {
+                    eraseCookie(thing);
+                }
+                break;
+            case "10":
+                for (var i = 0, thing; thing = cookies_functionality[i]; i++) {
+                    eraseCookie(thing);
+                }
+                break;
+            case "11":
+                break;
+            default:
+                alert(opt + ' is the current value of the cookies-options cookie, which can\'t be processed, it can be 00, 01, 10 or 11');
+            }
+        } else {}
+    }
+
+</script>
